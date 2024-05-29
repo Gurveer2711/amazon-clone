@@ -55,7 +55,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -74,7 +74,7 @@ document.querySelector(".js-product-grid").innerHTML = productsHTML;
 //3. Make it Interactive
 
 //CART
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {  
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
 
@@ -109,6 +109,15 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
       totalQuantities += item.quantity;
     })
     document.querySelector('.js-total-quantity').innerHTML = totalQuantities;
-     
+
+    //Added 
+    const added = document.querySelector(`.js-added-${productId}`);
+    added.classList.add('added-to-cart-visible');
+
+    
+    setTimeout(()=>{
+      added.classList.remove('added-to-cart-visible');
+    },2000);
+
   });
 });

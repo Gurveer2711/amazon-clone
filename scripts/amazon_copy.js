@@ -98,7 +98,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         quantity: quantity,
       });
     }
- 
       /*cart quantity : 
       step1- Calculate the quantity
       step 2- put it on the web page

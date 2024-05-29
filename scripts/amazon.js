@@ -10,10 +10,9 @@ Main idea of JS:
 //this is called the data structures because it organizes the data
 //let products = [];
 
-
 //2. Generate the HTML
-let productsHTML = '';
- //Generating html for each product
+let productsHTML = "";
+//Generating html for each product
 products.forEach((product) => {
   //to accumulate the result
   productsHTML += ` 
@@ -45,7 +44,7 @@ products.forEach((product) => {
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        <option value="5">5</option>
+        <option value="5">5</option>  
         <option value="6">6</option>
         <option value="7">7</option>
         <option value="8">8</option>
@@ -61,7 +60,8 @@ products.forEach((product) => {
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart"
+    data-product-id = "${product.id}">
       Add to Cart
     </button>
   </div>
@@ -69,4 +69,36 @@ products.forEach((product) => {
 });
 
 //Generating HTML throught JS
-document.querySelector('.js-product-grid').innerHTML = productsHTML;
+document.querySelector(".js-product-grid").innerHTML = productsHTML;
+
+//3. Make it Interactive
+
+//CART
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+
+    let matchingItem;
+    let totalQuantities = 0;
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+
+      
+
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+    
+
+
+  });
+});

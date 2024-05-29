@@ -84,9 +84,11 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
       if (productId === item.productId) {
         matchingItem = item;
       }
-
-      
-
+        /*cart quantity : 
+      step1- Calculate the quantity
+      step 2- put it on the web page
+      */
+      totalQuantities += item.quantity;
     });
 
     if (matchingItem) {
@@ -97,8 +99,8 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         quantity: 1,
       });
     }
-    
-
-
+ 
+    document.querySelector('.js-total-quantity').innerHTML = totalQuantities;
+     
   });
 });

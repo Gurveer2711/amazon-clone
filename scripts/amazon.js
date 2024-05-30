@@ -1,5 +1,5 @@
-import {cart,addToCart } from "../data/cart.js";
-import {products } from "../data/products.js";
+import {cart ,addToCart,TotalQuantity } from "../data/cart.js";
+import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
 
@@ -79,20 +79,11 @@ document.querySelector(".js-product-grid").innerHTML = productsHTML;
 //3. Make it Interactive
 
 //CART
-
-function TotalCartQuantity() {
-  /*cart quantity : 
-    step1- Calculate the quantity
-    step 2- put it on the web page
-  */
-  let totalQuantities = 0;
-
-  cart.forEach((cartItem) => {
-    totalQuantities += cartItem.quantity;
-  });
-  document.querySelector(".js-total-quantity").innerHTML = totalQuantities;
+function TotalCartQuantity(){
+let totalCartQuantities = TotalQuantity();
+document.querySelector(".js-total-quantity").innerHTML = totalCartQuantities;
 }
-
+TotalCartQuantity();
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;

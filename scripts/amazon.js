@@ -1,4 +1,6 @@
-import {cart} from '../data/cart.js';
+import {cart,addToCart } from "../data/cart.js";
+import {products } from "../data/products.js";
+
 
 /*
 Main idea of JS:
@@ -76,50 +78,35 @@ document.querySelector(".js-product-grid").innerHTML = productsHTML;
 //3. Make it Interactive
 
 //CART
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {  
+
+
+function TotalCartQuantity() {
+  /*cart quantity : 
+    step1- Calculate the quantity
+    step 2- put it on the web page
+  */
+  let totalQuantities = 0;
+
+  cart.forEach((cartItem) => {
+    totalQuantities += cartItem.quantity;
+  });
+  document.querySelector(".js-total-quantity").innerHTML = totalQuantities;
+}
+
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
 
-    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-    const quantity = Number(quantitySelector.value);
-    
+    addToCart(productId);
+    TotalCartQuantity();
 
-    let matchingItem;
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-      
-    });
+    //Added
+   const added = document.querySelector(`.js-added-${productId}`);
+   added.classList.add("added-to-cart-visible");
 
-    if (matchingItem) {
-      matchingItem.quantity += quantity;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: quantity,
-      });
-    }
- 
-      /*cart quantity : 
-      step1- Calculate the quantity
-      step 2- put it on the web page
-      */
-    let totalQuantities = 0;
-
-    cart.forEach((item)=>{
-      totalQuantities += item.quantity;
-    })
-    document.querySelector('.js-total-quantity').innerHTML = totalQuantities;
-
-    //Added 
-    const added = document.querySelector(`.js-added-${productId}`);
-    added.classList.add('added-to-cart-visible');
-
-    
-    setTimeout(()=>{
-      added.classList.remove('added-to-cart-visible');
-    },2000);
+   setTimeout(() => {
+     added.classList.remove("added-to-cart-visible");
+   }, 2000);
 
   });
 });

@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+
 /*
 Main idea of JS:
 1. Save the data

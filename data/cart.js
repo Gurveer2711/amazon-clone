@@ -1,4 +1,4 @@
-export const cart = [
+export let cart = [
     //We are not using saving images and name , i.e bcoz we are taking product id and we can search rest of the deailts in the product array.
     //This method is called deduplicating the data or normalizing the data.
     //this is common technique in software engineering.
@@ -31,4 +31,16 @@ export function addToCart(productId) {
         quantity: quantity,
       });
     }
+  }
+
+  export function removeFromCart(productId){
+    let newCart = [];
+
+    cart.forEach((cartItem)=>{
+      if(cartItem.productId !== productId){
+        newCart.push(cartItem);
+      }
+    });
+
+    cart = newCart;
   }

@@ -80,7 +80,6 @@ document.querySelector(".js-product-grid").innerHTML = productsHTML;
 
 //CART
 
-
 function TotalCartQuantity() {
   /*cart quantity : 
     step1- Calculate the quantity

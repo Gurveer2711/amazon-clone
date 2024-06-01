@@ -10,6 +10,7 @@ import { formatCurrency } from "./utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; //only one value we can take
 import { deliveryOptions } from "../data/deliveryOptions.js";
 
+function renderOrderSummary(){
 let cartSummaryHTML = " ";
 
 cart.forEach((cartItem) => {
@@ -34,13 +35,10 @@ cart.forEach((cartItem) => {
       deliveryOption = option;
     }
   });
+
   const today = dayjs();
   const delivery = today.add(deliveryOption.deliveryDays, "days");
-  const dateString = delivery.format("dddd, MMMM, D");
- 
-
-
-
+  const dateString = delivery.format("dddd, MMMM, D");    
   cartSummaryHTML += `
 <div class="cart-item-container js-cart-item-container-${matchingItem.id}">
     <div class="delivery-date">
@@ -192,5 +190,8 @@ document.querySelectorAll('.js-delivery-option')
     option.addEventListener('click',() =>{
       const {productId,deliveryOptionId} = option.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
+      renderOrderSummary();
     });
   });
+}
+renderOrderSummary();

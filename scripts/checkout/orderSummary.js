@@ -9,7 +9,7 @@ import { getProduct} from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; //only one value we can take
 import { deliveryOptions,getDeliveryOptionId } from "../../data/deliveryOptions.js";
-
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary() {
   let cartSummaryHTML = " ";
@@ -128,6 +128,8 @@ export function renderOrderSummary() {
       );
       deleteItem.remove();
       UpdateCheckoutQuantities();
+
+      renderPaymentSummary();
     });
   });
 
@@ -176,6 +178,7 @@ export function renderOrderSummary() {
         newQuantity;
 
       UpdateCheckoutQuantities();
+      renderPaymentSummary();
     });
   });
 
@@ -184,6 +187,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = option.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }

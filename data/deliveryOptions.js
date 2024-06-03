@@ -1,3 +1,5 @@
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; //only one value we can take
+
 //we made this because we have add deliveryOptionId in cart.js so we can take the rest of the necessary data. This is called normalizing the data
 export const deliveryOptions = [{
     id:'1',
@@ -24,3 +26,10 @@ export function getDeliveryOptionId(deliveryDates){
     return deliveryOption || deliveryOption[0];
   }
   
+export function getdeliveryDates(deliveryOption){
+  const today = dayjs();
+  const delivery = today.add(deliveryOption.deliveryDays, "days");
+  const dateString = delivery.format("dddd, MMMM, D");
+
+  return dateString;
+}

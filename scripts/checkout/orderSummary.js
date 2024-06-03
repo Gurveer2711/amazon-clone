@@ -123,12 +123,9 @@ export function renderOrderSummary() {
       const productId = link.dataset.productIdCode;
       removeFromCart(productId);
 
-      let deleteItem = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-      deleteItem.remove();
+      
+      renderOrderSummary();
       UpdateCheckoutQuantities();
-
       renderPaymentSummary();
     });
   });

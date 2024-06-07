@@ -11,7 +11,7 @@ export function getProduct(MatchproductId){
     return matchingItem;
   }
 
-class Product{
+class Product{ //parent class
   id;
   image;
   name;
@@ -31,6 +31,25 @@ class Product{
   }
   getPrice(){
     return `$${formatCurrency(this.priceCents)}`
+  }
+  extraInfoHTML(){
+    return '';
+  }
+}
+
+//child class
+class Clothing extends Product{
+  sizeChartLink;
+
+  constructor(productDetails){
+    super(productDetails); //super() calls the constructor function of parent class.
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML(){ //we define this method again inside clothing. this is bcoz it will cancel or override the parent method. This is called method overriding. 
+    return`
+    <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
+    `
   }
 }
 
@@ -694,5 +713,8 @@ export const products = [
     ]
   }
 ].map((productDetails)=>{ //Why productDetails: bcoz in each object of this array contains product details.
+  if(productDetails.type === 'clothing'){
+    return new Clothing(productDetails);
+  }
  return new Product(productDetails);
 });

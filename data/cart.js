@@ -1,10 +1,14 @@
-export let cart = JSON.parse(localStorage.getItem("cart"));
+export let cart;
 
-if (!cart) {
-  //We are not using saving images and name , i.e bcoz we are taking product id and we can search rest of the deailts in the product array.
-  //This method is called deduplicating the data or normalizing the data.
-  //this is common technique in software engineering.
-  cart = [
+loadfromstorage();
+export function loadfromstorage(){
+  cart = JSON.parse(localStorage.getItem("cart"));
+
+  if (!cart) {
+    //We are not using saving images and name , i.e bcoz we are taking product id and we can search rest of the deailts in the product array.
+    //This method is called deduplicating the data or normalizing the data.
+    //this is common technique in software engineering.
+    cart = [
     {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       quantity: 2,
@@ -15,8 +19,8 @@ if (!cart) {
       quantity: 1,
       deliveryOptionId : '2'
     }];
+  }
 }
-
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart)); //using JSON stringify because localstorage takes strings
 }
@@ -96,6 +100,5 @@ export function updateDeliveryOption(productId,deliveryOptionId){
   });
 
   matchingItem.deliveryOptionId = deliveryOptionId;
-
   saveToStorage();
 }

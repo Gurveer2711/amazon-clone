@@ -53,6 +53,29 @@ class Clothing extends Product{
   }
 }
 
+export let products = [];
+
+export function loadProducts(func){
+  const xhr = new XMLHttpRequest();
+
+xhr.addEventListener('load',()=>{
+  products = JSON.parse(xhr.response).map((productDetails)=>{ //Why productDetails: bcoz in each object of this array contains product details.
+    if(productDetails.type === 'clothing'){
+      return new Clothing(productDetails);
+    }
+   return new Product(productDetails);
+  });
+
+  console.log('products');
+
+  func(); //this function is callled callback function bcoz we gave the parameter a function to run in the future.
+});
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send(); //it is async. this will create and send the request but it wont wait for the response to come back.
+}
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -718,3 +741,4 @@ export const products = [
   }
  return new Product(productDetails);
 });
+*/

@@ -102,3 +102,16 @@ export function updateDeliveryOption(productId,deliveryOptionId){
   matchingItem.deliveryOptionId = deliveryOptionId;
   saveToStorage();
 }
+
+export function loadCart(func){
+  const xhr = new XMLHttpRequest();
+
+xhr.addEventListener('load',()=>{
+  console.log(xhr.response);
+
+  func(); //this function is callled callback function bcoz we gave the parameter a function to run in the future.
+});
+
+  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.send(); //it is async. this will create and send the request but it wont wait for the response to come back.
+}

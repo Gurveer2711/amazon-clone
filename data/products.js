@@ -1,4 +1,5 @@
 import { formatCurrency } from "../scripts/utils/money.js";
+
 export function getProduct(MatchproductId){
   let matchingItem;
 
@@ -54,6 +55,31 @@ class Clothing extends Product{
 }
 
 export let products = [];
+
+export function loadProductsFetch(){
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
+    return response.json();//json parse 
+  }).then((productsData) => {
+    products = productsData.map((productDetails)=>{ //Why productDetails: bcoz in each object of this array contains product details.
+      if(productDetails.type === 'clothing'){
+        return new Clothing(productDetails);
+      }
+     return new Product(productDetails);
+    });
+  
+    console.log('load products');
+  
+    
+  return promise;
+  })
+}
+/*
+loadProductsFetch().then(()=>{ 
+console.log('NEXT STep');
+});
+*/
 
 export function loadProducts(func){
   const xhr = new XMLHttpRequest();

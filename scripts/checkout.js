@@ -6,6 +6,22 @@ import { loadCart } from "../data/cart.js";
 // import "../data/cart-class.js";
 //import '../data/backend-practice.js';
 
+async function loadPage(){
+  await loadProductsFetch();
+
+  await new Promise((resolve) => { //to wait for the loadcart to complete we simply put await.
+    loadCart(() => {
+      resolve();
+    });
+  });
+
+  renderOrderSummary();
+  renderPaymentSummary();
+
+}
+loadPage();
+
+/*
   Promise.all([
     loadProductsFetch(),
     new Promise((resolve) => {
@@ -18,6 +34,7 @@ import { loadCart } from "../data/cart.js";
         renderOrderSummary();
         renderPaymentSummary();
     });
+*/
 
 /*
 new Promise((resolve) => {

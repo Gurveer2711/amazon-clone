@@ -72,8 +72,10 @@ export function loadProductsFetch(){
     console.log('load products');
   
     
-  return promise;
+  }).catch(()=>{
+
   })
+  return promise;
 }
 /*
 loadProductsFetch().then(()=>{ 
@@ -96,7 +98,9 @@ xhr.addEventListener('load',()=>{
 
   func(); //this function is callled callback function bcoz we gave the parameter a function to run in the future.
 });
-
+  xhr.addEventListener('error',(error)=>{
+    console.log('Unexpected error,Pleaase try again later.');
+  });
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send(); //it is async. this will create and send the request but it wont wait for the response to come back.
 }
